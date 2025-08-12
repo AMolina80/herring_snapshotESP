@@ -1,17 +1,18 @@
-# Northeast ESP Template
+# Atlantic herring snapshot ESP
 
-This repository serves as a template for creating R projects for each stock-specific ESP.
-This repository should be cloned and named for the intended ESP (for example, 'bsbESP' or 'longfinESP'), then transferred to the NEFSC Github organization.
+This repository is a clone of the template for creating R projects for each stock-specific ESP.
+This repository used to create the Atlantic herring snapshot ESP (the repository for the original ESP is elsewhere)
 
-The template contains the following folders:
+The repository contains the following folders:
 
 ### 01_inputs
 
-Describe your input data
+Indicator time series from working group members
+Monthly NAO data
 
 ### 02_intermediates
 
-Describe any intermediate data products
+Plots for the snapshot
 
 ### 03_outputs
 
@@ -19,17 +20,16 @@ Describe your final data products
 
 ### 04_scripts
 
-Describe the purpose of each script
-
-script_template.R has a sample layout for scripts
+Scripts to update indicator time series and create plots for the snapshot
+Function script for the plotting
 
 ### 05_images
 
-Describe the purpose of the figures in this folder
+Images to use in the snapshot ESP
 
 ### 06_docs
 
-Contains template files to create a Snapshot ESP
+Contains files to create snapshot ESP
 
 
 #### Legal Disclaimer
