@@ -38,15 +38,12 @@ winter_avg_nao <- nao_winter %>%
   rename(Year=Winter_Year)
 
 # Save output
-# need to update the year range
 plot_indicator_time_series(
   data = winter_avg_nao,
   value_col = "Winter_NAO", 
   plot_title = "",
   y_label = "",
   x_label = "",
-  img_dir = "02_intermediates",
-  x_axis_limits = c(1980, 2025))
-
-### Mark lines where outputs are saved ----
-
+  img_dir = "05_images",
+  x_axis_limits = c(1980, 2025),set_aspect_ratio = 1/6
+  )

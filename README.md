@@ -1,7 +1,7 @@
 # Atlantic herring snapshot ESP
 
 This repository is a clone of the template for creating R projects for each stock-specific ESP.
-This repository used to create the Atlantic herring snapshot ESP (the repository for the original ESP is elsewhere)
+This repository is used to create the Atlantic herring snapshot ESP (the repository for the original ESP is elsewhere)
 
 The repository contains the following folders:
 
@@ -9,6 +9,7 @@ The repository contains the following folders:
 
 Indicator time series from working group members
 Monthly NAO data
+Shapefiles
 
 ### 02_intermediates
 

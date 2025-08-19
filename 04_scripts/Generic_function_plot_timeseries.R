@@ -6,12 +6,12 @@ library(ggplot2)
 #' Generic Function to Plot Indicator Time Series
 #'
 #' This function generates a ggplot2 visualization for any time series data,
-#' formatted to match the style of your previous NAO and Haddock plots.
 #' It includes a line plot, points, and horizontal lines for the mean and
 #' +/- 1 standard deviation of the indicator values.
 #'
 #' @param data A data frame containing the time series data. It must have
 #'             a 'Year' column and a column specified by 'value_col'.
+#'             
 #' @param value_col A string specifying the name of the column in 'data' that
 #'                  contains the indicator values to be plotted (e.g., "NAO_Index", "Estimate_Value").
 #' @param plot_title A string for the plot title (default: ""). Set to NULL or "" for no title.
@@ -36,44 +36,10 @@ library(ggplot2)
 #'
 #' @return The filename of the saved plot (if saved), otherwise prints the
 #'         ggplot2 object.
-#' @examples
-#' # --- Example with a dummy dataset ---
 
-#' # --- Example with your NAO data (assuming 'winter_avg_nao' is prepared) ---
-#' # nao_data_raw <- read.table("norm.nao.monthly.b5001.current.ascii.txt",
-#' #                            col.names = c("Year", "Month", "NAO_Index"))
-#' # nao_winter <- nao_data_raw %>%
-#' #   mutate(Winter_Year = ifelse(Month == 12, Year + 1, Year)) %>%
-#' #   filter(Month %in% c(12, 1, 2, 3))
-#' # winter_avg_nao <- nao_winter %>%
-#' #   group_by(Winter_Year) %>%
-#' #   summarise(Winter_NAO_Average = mean(NAO_Index, na.rm = TRUE)) %>%
-#' #   filter(Winter_Year <= max(nao_data_raw$Year))
-#' #
-#' # plot_indicator_time_series(
-#' #   data = winter_avg_nao,
-#' #   value_col = "Winter_NAO_Average", # Specify the correct column name
-#' #   plot_title = "Winter Average NAO Index (Generic)",
-#' #   x_label = "Winter Year",
-#' #   img_dir = tempdir()
-#' # )
-#'
-#' # --- Example with your Haddock data (assuming 'haddock_prepared_data' is prepared) ---
-#' # haddock_data_raw <- read.csv("haddock_eat_herring_eggs_index.csv")
-#' # haddock_prepared_data <- haddock_data_raw %>%
-#' #   rename(Year = YEAR, Estimate_Value = est) %>%
-#' #   select(Year, Estimate_Value)
-#' #
-#' # plot_indicator_time_series(
-#' #   data = haddock_prepared_data,
-#' #   value_col = "Estimate_Value", # Specify the correct column name
-#' #   plot_title = "Haddock Predation Index (Generic)",
-#' #   y_label = "Predation Estimate",
-#' #   img_dir = tempdir(),
-#' #   x_axis_limits = c(1960, 2005)
-#' # )
 plot_indicator_time_series <- function(data,
                                        value_col,
+                                       facet_by = NULL,
                                        plot_title = "",
                                        x_label = "Year",
                                        y_label = "Indicator Value",
@@ -94,7 +60,10 @@ plot_indicator_time_series <- function(data,
   if (!value_col %in% names(data)) {
     stop(paste0("Data frame must contain a '", value_col, "' column for indicator values."))
   }
-  
+  # Check for faceting column if specified
+  if (!is.null(facet_by) && !(facet_by %in% names(data))) {
+    stop(paste0("Data frame must contain a '", facet_by, "' column for faceting."))
+  }
   # Calculate mean and standard deviation of the specified value column
   # Use .data[[]] for dynamic column access within dplyr/ggplot contexts
   mean_value <- mean(data[[value_col]], na.rm = TRUE)
@@ -106,7 +75,8 @@ plot_indicator_time_series <- function(data,
   if (nchar(clean_title) == 0) {
     clean_title <- value_col
   }
-  short_name <- paste0(clean_title, "_", Sys.Date(), ".png")
+  #short_name <- paste0(clean_title, "_", Sys.Date(), ".png")
+  short_name <- paste0(clean_title,".png")
   fname <- file.path(img_dir, short_name)
   
   # Create the ggplot object
@@ -135,6 +105,11 @@ plot_indicator_time_series <- function(data,
       plot.background = element_rect(fill = "transparent", color = "transparent"),
       panel.background = element_rect(fill = "transparent", color = NA) # Ensure panel is also transparent
     )
+  
+  # Add faceting if a column is specified
+  if (!is.null(facet_by)) {
+    fig <- fig + facet_wrap(as.formula(paste("~", facet_by)), scales = "free_y")
+  }
   
   # Apply x-axis limits if specified
   if (!is.na(x_axis_limits[1])) {

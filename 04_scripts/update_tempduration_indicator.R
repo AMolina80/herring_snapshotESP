@@ -68,13 +68,16 @@ opt_duration_indicator <-opt_duration_indicator%>%
   rbind(result)
 
 # add snippet of code to save out csv
+
+# Save the plot
 plot_indicator_time_series(
   data = opt_duration_indicator,
   value_col = "duration", 
   plot_title = "",
   y_label = "",
   x_label = "",
-  img_dir = "02_intermediates",
-  x_axis_limits = c(1980, 2025))
+  img_dir = "05_images",
+  x_axis_limits = c(1980, 2025),set_aspect_ratio = 3/8
+  )
 
 ### Mark lines where outputs are saved ----

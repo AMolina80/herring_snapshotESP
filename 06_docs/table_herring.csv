@@ -1,7 +1,7 @@
 ﻿Indicator (units),Status,Implications,Time Series,w,h
-Small copepod,Add status in terminal year here (short phrase),Add implications here (3-5 sentences),test.png,3,0.75
-Large copepod,Add status in terminal year here (short phrase),Add implications here (3-5 sentences),noaa_logo.png,2.33,1
-Add indicator and units here,Add status in terminal year here (short phrase),Add implications here (3-5 sentences),noaa_logo.png,2.33,1
+Winter NAO (Index),WinterNAO anomalies have been positive in 2024 and 2025,Positive NAO associated with warmer saltier water entering the Gulf of Maine [cite] and lagged impacts to zooplankton,Winter_NAO.png,3,0.75
+Haddock Predation (Index),Declining predation on herring eggs,Lower egg predation favors strong year classes,haddock_pred.png,2.33,1
+Optimal larval temperature duration (# of days),Short duration of optimal larval temperature in fall 2024,Implications: Unsuitable conditions for larvae does not favor strong recruitment in 2025,duration.png,2.33,1
 Add indicator and units here,Add status in terminal year here (short phrase),Add implications here (3-5 sentences),noaa_logo.png,2.33,1
 Add indicator and units here,Add status in terminal year here (short phrase),Add implications here (3-5 sentences),noaa_logo.png,2.33,1
 Add indicator and units here,Add status in terminal year here (short phrase),Add implications here (3-5 sentences),noaa_logo.png,2.33,1
