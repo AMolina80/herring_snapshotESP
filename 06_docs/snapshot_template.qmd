@@ -12,8 +12,9 @@ format:
     include-in-header: template.tex    
     # keep-tex: true
     papersize: letter
+latex_engine: xelatex
 params:
-  widths: !expr c(0.9, 0.75, 3, 3)
+  widths: !expr c(0.9, 0.75, 2.5, 3.5)
   img1: !expr here::here("05_images/herrmap.png")
   img2: !expr here::here("05_images/new_condition.png")
   img3: !expr here::here("05_images/noaa_logo.png")
@@ -28,7 +29,7 @@ knitr::opts_chunk$set(echo = FALSE)
 #devtools::load_all()
 ```
 
-\vspace{-0.25cm}
+\vspace{-2cm}
 
 \section{Summer `r params$terminal_year`}
 
@@ -36,7 +37,7 @@ This is a short-form update to the full Ecosystem and Socioeconomic Profile \[1\
 
 \vspace{-0.25cm}
 
-::: {layout="[ [0.4, 0.025, 0.575], [1], [0.575, 0.025, 0.4]] "}
+::: {layout="[ [0.3, 0.025, 0.675], [1], [0.575, 0.025, 0.4]] "}
 
 :::{}
 ![](`r params$img1`)
@@ -53,7 +54,7 @@ This is a short-form update to the full Ecosystem and Socioeconomic Profile \[1\
 
 \subsection{2025 Research Track Stock Assessment}
 
--   Explored a recruitment index from seabird diet data \[2\]\
+-   Explored a recruitment index from seabird diet data \[2\]
 -   Developed indicators of predation by haddock \[3\], food availability \[4\], and temperatures experienced by larvae \[5\] to test as ecosystem covariates for recruitment but none significantly improved the model
 
 \subsection{Fishing community observations}
@@ -125,8 +126,13 @@ data <- NEesp2::format_tbl_data(file = params$tbl_file,
 ```
 
 ```{r}
-NEesp2::rpt_card_table(data,
+tbl <- NEesp2::rpt_card_table(data,
                        widths = params$widths)
+
+tbl <- flextable::font(tbl, fontname = "Times New Roman", part = "body")
+tbl <- flextable::font(tbl, fontname = "Times New Roman", part = "header")
+
+tbl
 ```
 
 

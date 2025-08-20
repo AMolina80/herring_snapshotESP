@@ -1,4 +1,3 @@
-
 # Metadata ----
 
 ### Project name:
@@ -17,21 +16,32 @@ library(ggplot2)
 # Data ----
 
 # Provided by Micah dean (MADMF)
-haddock_predation_index <-  read.csv('01_inputs/haddock_eat_herring_eggs_index.csv') %>%
-  dplyr::rename(Year=YEAR,
-                haddock_pred=log_est) %>% # rename to be more informative, use the logged index value
-  filter(Year>=1983)
+haddock_predation_index <- read.csv(
+  '01_inputs/haddock_eat_herring_eggs_index.csv'
+) %>%
+  dplyr::rename(Year = YEAR, haddock_pred = log_est) %>% # rename to be more informative, use the logged index value
+  filter(Year >= 1983)
 
 # Analyses ----
 # Plot and save output
 plot_indicator_time_series(
   data = haddock_predation_index,
-  value_col = "haddock_pred", 
+  value_col = "haddock_pred",
   plot_title = "",
   y_label = "",
   x_label = "",
   img_dir = "05_images",
-  x_axis_limits = c(1980, 2025),set_aspect_ratio = 1/4)
+  x_axis_limits = c(1980, 2025),
+  set_aspect_ratio = FALSE
+)
+
+haddock_predation_index |>
+  dplyr::mutate(INDICATOR_NAME = "haddock_predation_index") |>
+  dplyr::rename(YEAR = Year, DATA_VALUE = haddock_pred) |>
+  plt_herring(
+    img_dir = here::here("05_images"),
+    ind_name = "haddock_predation_index",
+    years = 1980:2025
+  )
 
 ### Mark lines where outputs are saved ----
-
