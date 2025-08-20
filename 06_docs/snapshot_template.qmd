@@ -20,7 +20,6 @@ params:
   tbl_file: !expr here::here("06_docs/table_herring.csv")
   img_dir: !expr here::here("05_images")
   terminal_year: 2025
-  #risk_url: https://static1.squarespace.com/static/511cdc7fe4b00307a2628ac6/t/6747560a3cf66936045e5547/1732728332670/05_EAFM+Risk+Assessment.pdf
 ---
 
 ```{r setup, include=FALSE}
@@ -29,7 +28,7 @@ knitr::opts_chunk$set(echo = FALSE)
 #devtools::load_all()
 ```
 
-\vspace{-2.5cm}
+\vspace{-0.25cm}
 
 \section{Summer `r params$terminal_year`}
 
@@ -134,5 +133,6 @@ NEesp2::rpt_card_table(data,
 ::: {}
 
 \centering
-Please contact [nefsc.esp.leads@noaa.gov](nefsc.esp.leads@noaa.gov) with any questions or comments.
+We welcome your observations! Please contact northeast.ecosystem.highlights@noaa.gov with any on-the-water
+insights or changes observed in the black sea bass fishery and [nefsc.esp.leads@noaa.gov](nefsc.esp.leads@noaa.gov) with questions or comments on the information presented in this report.
 :::

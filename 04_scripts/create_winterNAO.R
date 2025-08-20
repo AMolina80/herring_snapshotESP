@@ -45,5 +45,5 @@ plot_indicator_time_series(
   y_label = "",
   x_label = "",
   img_dir = "05_images",
-  x_axis_limits = c(1980, 2025),set_aspect_ratio = 1/6
+  x_axis_limits = c(1980, 2025),set_aspect_ratio = 1/4
   )

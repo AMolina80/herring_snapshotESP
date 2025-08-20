@@ -18,26 +18,9 @@ condition_data <- ecodata::condition %>%
                 DATA_VALUE=Value)
 
 
-# Using NEesp2 function ---------------------------------------------------
-# no option for facets the lines forthe three EPUs are all stacked up
+# Using NEesp2 function - use this---------------------------------------------------
 plt <- NEesp2::plot_condition(data=condition_data, var = "Atlantic herring")
 
-plt +
-  ggplot2::guides(shape = "none"#,
-                  # color = ggplot2::guide_legend(ncol = 3)
-  ) +
-  ggplot2::theme(aspect.ratio = 0.6,
-                 # legend.position = "bottom",
-                 # legend.direction = "horizontal",
-                 # legend.box = "horizontal",
-                 legend.title = ggplot2::element_blank(),
-                 # legend.byrow = TRUE,
-                 plot.background = ggplot2::element_rect(color = "black",
-                                                         linewidth = 2)) +
-  ggplot2::ylab("Relative condition") +
-  ggplot2::scale_y_continuous(breaks = seq(0.9, 1.05, by = 0.05),
-                              limits = c(0.88, 1.05))
-#####
 plt +
   ggplot2::geom_point(ggplot2::aes(shape = EPU), size = 2) +
   ggplot2::guides(
@@ -45,9 +28,9 @@ plt +
     color = ggplot2::guide_legend(ncol = 1) # Force color legend to be a single column to stack
   ) +
   ggplot2::theme(
-    aspect.ratio = 9/16,
+    aspect.ratio = 1/4,
     legend.title = ggplot2::element_blank(),
-    axis.title.y = element_text(size = 16),
+    axis.title.y = ggplot2::element_text(size = 16),
     legend.background = ggplot2::element_blank(),
     legend.text = ggplot2::element_text(size = 12), # Make legend text smaller
     legend.box = "vertical", # Stack legends vertically
