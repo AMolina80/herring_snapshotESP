@@ -1,10 +1,10 @@
 # Metadata ----
 
-### Project name:
-### Code purpose:
+### Project name: Herring snapshot ESP
+### Code purpose: Plot the haddock predation indicator in the snapshot table format
 
-### Author:
-### Date started:
+### Author: Adelle
+### Date started: 8/12/25
 
 ### Code reviewer:
 ### Date reviewed:
@@ -35,6 +35,7 @@ plot_indicator_time_series(
   set_aspect_ratio = FALSE
 )
 
+# change format to work with plt_herring function and save plot
 haddock_predation_index |>
   dplyr::mutate(INDICATOR_NAME = "haddock_predation_index") |>
   dplyr::rename(YEAR = Year, DATA_VALUE = haddock_pred) |>
@@ -44,4 +45,3 @@ haddock_predation_index |>
     years = 1980:2025
   )
 
-### Mark lines where outputs are saved ----

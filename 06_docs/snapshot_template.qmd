@@ -110,6 +110,7 @@ This is a short-form update to the full Ecosystem and Socioeconomic Profile \[1\
 
 ::: {}
 ![](`r params$img2`)
+<!-- figure out how to make this bigger -->
 <!-- ![](`r params$img3`) -->
 :::
 

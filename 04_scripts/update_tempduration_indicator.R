@@ -81,3 +81,12 @@ plot_indicator_time_series(
   set_aspect_ratio = 1/4
   )
 
+# change format to work with plt_herring function and save plot
+opt_duration_indicator |>
+  dplyr::mutate(INDICATOR_NAME = "temp_duration") |>
+  dplyr::rename(YEAR = Year, DATA_VALUE = duration) |>
+  plt_herring(
+    img_dir = here::here("05_images"),
+    ind_name = "temp_duration",
+    years = 1980:2025
+  )

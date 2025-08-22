@@ -50,6 +50,7 @@ plot_indicator_time_series(
   set_aspect_ratio = TRUE
 )
 
+# change format to work with plt_herring function and save plot
 winter_avg_nao |>
   dplyr::mutate(INDICATOR_NAME = "winter_nao") |>
   dplyr::rename(YEAR = Year, DATA_VALUE = Winter_NAO) |>
@@ -58,3 +59,4 @@ winter_avg_nao |>
     ind_name = "winter_nao",
     years = 1980:2025
   )
+
