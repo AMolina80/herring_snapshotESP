@@ -28,7 +28,7 @@ plt +
     color = ggplot2::guide_legend(ncol = 1) # Force color legend to be a single column to stack
   ) +
   ggplot2::theme(
-    #aspect.ratio = 1/4,
+    aspect.ratio = 9/16,
     legend.title = ggplot2::element_blank(),
     axis.title.y = ggplot2::element_text(size = 16),
     legend.background = ggplot2::element_blank(),
@@ -42,9 +42,7 @@ plt +
                               limits = c(0.88, 1.05))
 
 ggplot2::ggsave(here::here("05_images/new_condition.png"),
-                  #plot = fig,
-                  #width = 16, # Fixed width from previous examples
-                  #height = 9, # Fixed height from previous examples for non-faceted plot
+                  #width = 2, height = 9,dpi = 300, units = "in",
                   bg = "transparent") # Ensure transparent background for saved file
 
 # Using my function -------------------------------------------------------
