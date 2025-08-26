@@ -1,0 +1,125 @@
+---
+title: "Commercial Indicator Plots for Herring Snapshot ESP"
+author: "Adelle Molina"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+# Set global knitr options
+knitr::opts_chunk$set(
+  echo = FALSE,
+  message = FALSE,
+  warning = FALSE
+)
+
+# Load libraries
+library(knitr)
+library(ggplot2)
+library(stringr)
+library(here)
+```
+
+
+```{r wrangle data}
+### old version with code dump
+# Make sure 'plt_herring_function.R' is in your working directory.
+source(here::here("04_scripts/plt_herring_function.R"))
+
+# Load the dataset
+com_dat <- read.csv(here::here("01_inputs/SOCIEOECONOMIC_COMMERCIAL_INDICATORS_FINAL.csv"), header = T)
+
+```
+
+
+
+```{r }
+# Loop through each indicator and display its corresponding plot
+for (i in 1:6) {
+  img_dir = here::here("05_images")
+  short_name <- paste0(unique_indicators[i], "_",Sys.Date(), ".png")
+  fname <- paste(img_dir, short_name, sep = "/")
+  
+# Construct an alternative filename for "millions" case
+  millions_name <- paste0(unique_indicators[i], "_millions_", Sys.Date(),  ".png")
+  millions_fname <- paste(img_dir, millions_name, sep = "/")
+
+# Check for the primary filename, if it doesn't exist, check for the "millions" version
+if (file.exists(fname)) {
+  knitr::include_graphics(fname)
+} else if (file.exists(millions_fname)) {
+  knitr::include_graphics(millions_fname)
+} else {
+  cat(paste0("Plot for '", ind_name, "' not found at either path."))
+}
+
+  cat("\n\n") # Add space after each plot
+}
+```
+
+
+```{r}
+short_name <- paste0(unique_indicators[2], "_",Sys.Date(), ".png")
+fname <- paste(img_dir, short_name, sep = "/")
+knitr::include_graphics(fname)
+
+```
+
+
+
+```{r make & save plots}
+
+# Get unique indicator names
+unique_indicators <- unique(com_dat$INDICATOR_NAME)
+
+# Use a for loop to iterate over each unique indicator
+for (ind_name in unique_indicators) {
+  # Call the plt_herring function for the current indicator
+  plt_herring(
+    data = com_dat,
+    ind_name = ind_name,
+    img_dir = here::here("05_images"),
+    years = 1989:2025,
+    show_plot = T
+  )
+} 
+# this works but it's just a bunch of graphs on a page
+# add some titles here so we know what each one is
+```
+
+```{r}
+# Loop through each indicator
+for (ind_name in unique_indicators) {
+  # Generate a clean title for the section
+  clean_title <- gsub("_", " ", ind_name)
+  cat(paste0("\n### ", tools::toTitleCase(clean_title), "\n\n"))
+  
+  # Call the plt_herring function to generate and save the plot
+  # The function will return the full path to the saved file
+  plot_path <- plt_herring(
+    data = com_dat,
+    ind_name = ind_name,
+    img_dir = image_directory,
+    show_plot = FALSE # Set to FALSE to only save the plot, not display it here
+  )
+  
+  # Check for the filename with "millions" in case the function renamed it
+  millions_plot_path <- here("05_images", paste0(ind_name, "_millions_", Sys.Date(), ".png"))
+  
+  # Display the plot using knitr::include_graphics
+  if (file.exists(plot_path)) {
+    knitr::include_graphics(plot_path)
+  } else if (file.exists(millions_plot_path)) {
+    knitr::include_graphics(millions_plot_path)
+  } else {
+    cat("Error: Plot file not found.")
+  }
+  
+  cat("\n\n") # Add space between plots
+}
+```
+
+
+
+
+

@@ -24,6 +24,7 @@ The following plots are potential commercial fishery indicators for the snapshot
 
 ```{r load and clean}
 # Make sure 'plt_herring_function.R' is in your working directory.
+# make an R script to do this instead/also that sends images directly to archive
 source(here::here("04_scripts/plt_herring_function.R"))
 
 # Load and clean the data
@@ -72,33 +73,5 @@ for (ind_name in unique_indicators_clean) {
 }
 ```
 
-```{r}
-short_name <- paste0(unique_indicators[2], "_",Sys.Date(), ".png")
-fname <- paste(img_dir, short_name, sep = "/")
-knitr::include_graphics(fname)
 
-```
 
-```{r }
-# Loop through each indicator and display its corresponding plot
-for (i in 1:6) {
-  img_dir = here::here("05_images")
-  short_name <- paste0(unique_indicators[i], "_",Sys.Date(), ".png")
-  fname <- paste(img_dir, short_name, sep = "/")
-  
-# Construct an alternative filename for "millions" case
-  millions_name <- paste0(unique_indicators[i], "_millions_", Sys.Date(),  ".png")
-  millions_fname <- paste(img_dir, millions_name, sep = "/")
-
-# Check for the primary filename, if it doesn't exist, check for the "millions" version
-if (file.exists(fname)) {
-  knitr::include_graphics(fname)
-} else if (file.exists(millions_fname)) {
-  knitr::include_graphics(millions_fname)
-} else {
-  cat(paste0("Plot for '", ind_name, "' not found at either path."))
-}
-  ############not sure why it isn't finding some of the figures even though I see them there
-  cat("\n\n") # Add space after each plot
-}
-```
