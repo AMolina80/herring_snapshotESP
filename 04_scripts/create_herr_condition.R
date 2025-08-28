@@ -41,8 +41,8 @@ plt +
   ggplot2::scale_y_continuous(breaks = seq(0.9, 1.05, by = 0.05),
                               limits = c(0.88, 1.05))
 
-ggplot2::ggsave(here::here("05_images/new_condition.png"),
-                  #width = 2, height = 9,dpi = 300, units = "in",
+ggplot2::ggsave(here::here("05_images/new_condition_resize2.png"),
+                  width = 9, height = 5,dpi = 300, units = "in",
                   bg = "transparent") # Ensure transparent background for saved file
 
 # Using my function -------------------------------------------------------
