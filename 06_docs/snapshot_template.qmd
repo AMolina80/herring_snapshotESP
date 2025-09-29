@@ -150,15 +150,15 @@ insights or changes observed in the Atlantic herring fishery and [nefsc.esp.lead
 
 ::: {}
 \section{References}
-1.  A. Molina (2025) Atlantic herring Ecosystem and Socioeconomic Profile
-Trade-offs in the use of a seabird diet-derived recruitment index for the assessment of Atlantic herring in the Northeast U.S.
+1.  Molina (2025) Atlantic herring Ecosystem and Socioeconomic Profile, Working Paper
+2.  Hardison et al. (2025) Trade-offs in the use of a seabird diet-derived recruitment index for the assessment of Atlantic herring in the Northeast U.S., Working Paper
 
-2.  D. Micah (2025) Development of a haddock predation index as a recruitment covariate in the Atlantic herring stock assessment model
-3.  S. Gaichas (2024).Working Paper: Developing zooplankton indices in VAST food availability 
+2.  Dean (2025) Development of a haddock predation index as a recruitment covariate in the Atlantic herring stock assessment model, Working paper
+3.  Gaichas (2024) Working Paper: Developing zooplankton indices in VAST food availability 
 
-4.  A. Molina (2025) Temperature Threshold Indicators
+4.  Molina (2025) Temperature Threshold Indicators
 
-5.  S. Gaichas & J. Deroba (2024) Working Paper: Recruitment covariate testing in WHAM
+5.  Gaichas & Deroba (2024) Working Paper: Recruitment covariate testing in WHAM
 
 6.  J. Cournane (2024) ATLANTIC HERRING RESEARCH TRACK WORKING GROUP STAKEHOLDER ENGAGEMENT SESSION
 
