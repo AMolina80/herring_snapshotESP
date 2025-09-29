@@ -8,21 +8,25 @@ The repository contains the following folders:
 ### 01_inputs
 
 Indicator time series from working group members
+  Haddock predation index
+  Optimal Duration
 Monthly NAO data
 Shapefiles
+Socioeconomic/Commercial data
 
 ### 02_intermediates
 
-Plots for the snapshot
+Updated indicator time series data...only duration was updated at this time
 
 ### 03_outputs
 
-Describe your final data products
+Combined CSV of all data used in the snapshot
 
 ### 04_scripts
 
-Scripts to update indicator time series and create plots for the snapshot
-Function script for the plotting
+There are individual scripts to create the various indicators....don't use those
+Use the script called "" to create and save plots and indicator time series
+Function script for the plotting - use plt_herring_function
 
 ### 05_images
 

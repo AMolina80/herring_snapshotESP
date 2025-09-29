@@ -9,7 +9,6 @@
 
 ### Code reviewer:
 ### Date reviewed:
-# Not sure what is going on but this isn't working right I don't think b/c raster names and time are different
 # Libraries & functions ----
 library(dplyr)
 library(ggplot2)
@@ -68,6 +67,8 @@ opt_duration_indicator <-opt_duration_indicator%>%
   rbind(result)
 
 # add snippet of code to save out csv
+saveRDS(opt_duration_indicator, 
+        file = here::here(paste0("02_intermediates/opt_duration_indicator", "_", Sys.Date(), ".rds")))
 
 # Save the plot
 plot_indicator_time_series(

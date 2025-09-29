@@ -64,8 +64,6 @@ plot_indicator_time_series(
   img_dir = "05_images",
 )
 
-# but this i guess picks an EPU...or plots all of them
-
 # Using ggplot ------------------------------------------------------------
 
 
