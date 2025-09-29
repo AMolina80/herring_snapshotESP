@@ -16,7 +16,7 @@ latex_engine: xelatex
 params:
   widths: !expr c(0.9, 0.75, 2.5, 3.5)
   img1: !expr here::here("05_images/herrmap.png")
-  img2: !expr here::here("05_images/new_condition_resize2.png")
+  img2: !expr here::here("05_images/herring_condition_final.png")
   img3: !expr here::here("05_images/noaa_logo.png")
   tbl_file: !expr here::here("06_docs/table_herring.csv")
   img_dir: !expr here::here("05_images")

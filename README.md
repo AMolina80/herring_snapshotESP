@@ -16,16 +16,18 @@ Socioeconomic/Commercial data
 
 ### 02_intermediates
 
-Updated indicator time series data...only duration was updated at this time
+Updated indicator time series data...only optimal temperature was updated at this time
 
 ### 03_outputs
 
-Combined CSV of all data used in the snapshot
+Combined CSV & rda of all data included in the snapshot
 
 ### 04_scripts
 
-There are individual scripts to create the various indicators....don't use those
-Use the script called "" to create and save plots and indicator time series
+There are individual scripts to create or plot the various indicators....don't use those
+First use update_tempduration_indicator to pull latest year of data and update --> save that to intermediates
+Then run the script called create_indicator_data to create and save plots (to images) \
+  This script also saves out the combined indicator time series into the outputs folder
 Function script for the plotting - use plt_herring_function
 
 ### 05_images

@@ -1,16 +1,19 @@
 # Metadata ---- 
 
 ### Project name: Atlantic herring Snapshot ESP
-### Code purpose: Create, plot, and save out indicator time series
+### Code purpose: Create, plot, and save out indicator time series. 
+###               This includes all ecosystem and socioeconomic indicators used in the snapshot ESP
 
 ### Author: Adelle Molina
-### Date started:
+### Date started: 9/29/25
 
 ### Code reviewer:
 ### Date reviewed:
 
 # libraries and functions
 library(dplyr)
+library(tidyverse)
+# must have ecodata and NEesp2
 # Make sure 'plt_herring_function.R' is in your working directory.
 source(here::here("04_scripts/plt_herring_function.R"))
 
@@ -124,6 +127,69 @@ herr_comm_dat <- read.csv(here::here("01_inputs/SOCIEOECONOMIC_COMMERCIAL_INDICA
     )
   )
 
+# Get the new, clean list of unique indicator names
+unique_indicators_clean <- unique(herr_comm_dat$INDICATOR_NAME)
+
+# Loop through the new indicator names and save out the plots
+for (ind_name in unique_indicators_clean) {
+  # Create a plot using the clean data. This assumes plt_herring is accessible.
+  plot_path <- plt_herring(
+    data = herr_comm_dat,
+    ind_name = ind_name,
+    img_dir = getwd(),
+    years = 1989:2025,
+    show_plot = F
+  )
+  # Check for millions filename as a fallback
+  plot_path_millions <- here::here("05_images", paste0(ind_name, "_millions_", Sys.Date(), ".png"))
+  
+  if (file.exists(plot_path)) {
+    knitr::include_graphics(plot_path)
+  } else if (file.exists(plot_path_millions)) {
+    knitr::include_graphics(plot_path_millions)
+  } else {
+    cat("Error: Plot file not found.")
+  }
+  
+}
+
 # Combine ecosystem & socioeconomic indicators --------------------------------------------
 
+# Pivot herring condition data from long to wide format so each EPU is its own variable
+herring_condition_wide <- herring_condition_data %>%
+  tidyr::pivot_wider(
+    id_cols = Year,
+    names_from = EPU,
+    values_from = MeanCond,
+    names_prefix = "condition_"
+  ) %>%
+  dplyr::select(Year, dplyr::starts_with("condition_"))
 
+# Combine ecosystem indicators
+# Oops need to read back in the updated duration indicator
+opt_duration_indicator <- readRDS(here::here('02_intermediates/opt_duration_indicator_2025-09-29.rds'))
+
+ecosystem_indicators <- herring_condition_wide %>%
+  dplyr::full_join(winter_avg_nao, by = "Year") %>%
+  dplyr::full_join(opt_duration_indicator, by = "Year") %>%
+  dplyr::left_join(haddock_predation_index, by = "Year") %>%
+  dplyr::select(Year, dplyr::starts_with("condition_"), Winter_NAO, haddock_pred, duration, start.day)%>%
+  dplyr::rename(Winter_NAO = Winter_NAO, Haddock_Predation = haddock_pred, 
+                Optimal_temp_duration= duration, Optimal_temp_start=start.day)
+
+# Pivot the socioeconomic data from long to wide format
+socioeconomic_indicators_wide <- herr_comm_dat %>%
+  dplyr::select(YEAR, INDICATOR_NAME, DATA_VALUE) %>%
+  dplyr::rename(Year=YEAR) %>%
+  tidyr::pivot_wider(
+    names_from = INDICATOR_NAME,
+    values_from = DATA_VALUE
+  )
+
+# Combine all indicators into a single data frame
+all_indicators <- ecosystem_indicators %>%
+  dplyr::full_join(socioeconomic_indicators_wide, by = "Year")
+
+# Export combined data as RData and CSV
+save(all_indicators, file = here::here("03_outputs/all_herring_snapshot_indicators.rda"))
+write.csv(all_indicators, file = here::here("03_outputs/all_herring_snapshot_indicators.csv"), row.names = FALSE)
